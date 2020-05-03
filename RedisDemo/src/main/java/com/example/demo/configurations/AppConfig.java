@@ -3,6 +3,7 @@ package com.example.demo.configurations;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -19,14 +20,21 @@ public class AppConfig {
 		RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(redisConnectionFactory);
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
-		redisTemplate.setEnableTransactionSupport(Boolean.TRUE);
 		redisTemplate.setValueSerializer(new StringRedisSerializer());
+		//redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+		//redisTemplate.setHashValueSerializer(new StringRedisSerializer());
+		redisTemplate.setEnableTransactionSupport(Boolean.TRUE);
 		return redisTemplate;
 	}
 
 	@Bean
 	public ValueOperations<String, String> valueOperations(RedisTemplate<String, String> redisTemplate) {
 		return redisTemplate.opsForValue();
+	}
+
+	@Bean
+	public HashOperations<String, Integer, Object> hashOperations(RedisTemplate<String, String> redisTemplate) {
+		return redisTemplate.opsForHash();
 	}
 
 	@Bean

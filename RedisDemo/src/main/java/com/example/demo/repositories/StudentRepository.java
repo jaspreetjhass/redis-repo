@@ -1,13 +1,15 @@
 package com.example.demo.repositories;
 
+import com.example.demo.models.Student;
+
 public interface StudentRepository {
 
-	String fetchStudent(Integer studentId);
+	Student fetchStudent(Integer studentId);
 
-	String saveStudent(String student, Integer StudentId);
+	Student saveStudent(Student student);
 
-	String updateStudent(String student, Integer studentId);
+	Student updateStudent(Student student);
 
-	String deleteStudent(Integer studentId);
+	Student deleteStudent(Integer studentId);
 
 }
