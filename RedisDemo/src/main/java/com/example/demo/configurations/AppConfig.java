@@ -16,8 +16,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class AppConfig {
 
 	@Bean
-	public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-		RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+	public RedisTemplate<String, ?> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+		RedisTemplate<String, ?> redisTemplate = new RedisTemplate<>();
 		redisTemplate.setConnectionFactory(redisConnectionFactory);
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setValueSerializer(new StringRedisSerializer());
@@ -28,12 +28,12 @@ public class AppConfig {
 	}
 
 	@Bean
-	public ValueOperations<String, String> valueOperations(RedisTemplate<String, String> redisTemplate) {
+	public ValueOperations<String, ?> valueOperations(RedisTemplate<String, ?> redisTemplate) {
 		return redisTemplate.opsForValue();
 	}
 
 	@Bean
-	public HashOperations<String, Integer, Object> hashOperations(RedisTemplate<String, String> redisTemplate) {
+	public HashOperations<String, Integer, Object> hashOperations(RedisTemplate<String, ?> redisTemplate) {
 		return redisTemplate.opsForHash();
 	}
 

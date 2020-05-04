@@ -14,22 +14,22 @@ import com.example.demo.models.Student;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-//@Repository
+@Repository
 public class StudentRepositoryImpl implements StudentRepository {
 
 	@Autowired
 	private ObjectMapper objectMapper;
 	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	private RedisTemplate<String, Object> redisTemplate;
 	@Autowired
-	private ValueOperations<String, String> valueOperations;
+	private ValueOperations<String, Object> valueOperations;
 	private static final Logger LOGGER = LoggerFactory.getLogger(StudentRepositoryImpl.class);
 
 	@Override
 	public Student fetchStudent(final Integer studentId) {
 		LOGGER.trace("Enter into fetchStudent method with parameters : {}", studentId);
 		final String key = AppConstant.STUDENT_KEY_PREFIX.concat(AppConstant.COLON).concat(String.valueOf(studentId));
-		final String studentStr = valueOperations.get(key);
+		final String studentStr = (String) valueOperations.get(key);
 		Student student = null;
 		try {
 			if (!StringUtils.isEmpty(studentStr))
@@ -77,7 +77,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	public Student deleteStudent(final Integer studentId) {
 		LOGGER.trace("Enter into deleteStudent method with parameters : {}", studentId);
 		final String key = AppConstant.STUDENT_KEY_PREFIX.concat(AppConstant.COLON).concat(String.valueOf(studentId));
-		final String studentStr = valueOperations.get(key);
+		final String studentStr = (String) valueOperations.get(key);
 		Student student = null;
 		try {
 			if (!StringUtils.isEmpty(studentStr))

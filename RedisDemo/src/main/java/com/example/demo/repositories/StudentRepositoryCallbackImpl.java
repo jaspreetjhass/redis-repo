@@ -17,7 +17,7 @@ import com.example.demo.models.Student;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Repository
+//@Repository
 public class StudentRepositoryCallbackImpl implements StudentRepository {
 
 	@Autowired
