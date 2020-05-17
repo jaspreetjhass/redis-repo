@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: redis-pubsub
+  profiles:
+    active:
+    - cloud
+  cloud:
+    config:
+      uri:
+      - http://localhost:9999
+      
+server:
+  port: 8090
+  
+logging:
+  level:
+    io.lettuce.core.pubsub: trace
