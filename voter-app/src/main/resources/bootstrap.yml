@@ -3,12 +3,11 @@ spring:
     name: voter-app
   profiles:
     active:
-    - ${PROFILE}  
+    - ${ACTIVE_PROFILE}  
   cloud:
     config:
       uri:
-      - ${CONFIG_SERVER}
-      
+      - ${CONFIG_SERVER_URL}  
       
 server:
   port: ${SERVER_PORT}      
