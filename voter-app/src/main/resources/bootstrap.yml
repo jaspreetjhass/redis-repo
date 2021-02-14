@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: voter-app
+  profiles:
+    active:
+    - ${PROFILE}  
+  cloud:
+    config:
+      uri:
+      - ${CONFIG_SERVER}
+      
+      
+server:
+  port: ${SERVER_PORT}      
