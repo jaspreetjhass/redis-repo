@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: survey-app
+  profiles:
+    active:
+    - ${PROFILE}  
+  cloud:
+    config:
+      uri:
+      - ${CONFIG_SERVER}
+      
+server:  port: ${SERVER_PORT}
